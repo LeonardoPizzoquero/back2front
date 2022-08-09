@@ -1,10 +1,11 @@
 import type { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 import Modal from 'react-modal';
+import NextNProgress from 'nextjs-progressbar';
 
-import Header from '../components/Header';
+import Header from 'components/Header';
 
-import '../styles/globals.css';
+import 'styles/globals.css';
 
 Modal.setAppElement('#__next');
 
@@ -16,6 +17,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <Component {...pageProps} />
 
       <Toaster />
+
+      <NextNProgress color="#f35c61" />
     </>
   );
 };

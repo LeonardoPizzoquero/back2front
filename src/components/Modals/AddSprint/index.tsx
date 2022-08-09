@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { addDoc, collection } from 'firebase/firestore';
 
-import { db } from '../../services/firebase';
+import { db } from 'services/firebase';
+import Button from 'components/Button';
 
 type FormData = {
   number: string;
@@ -49,7 +50,7 @@ const AddSprint = ({ onRequestClose }: AddSprintProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="text-3xl text-white font-bold mb-6">Create New Sprint</h1>
+      <h1 className="text-3xl text-white font-bold mb-6">Create new sprint</h1>
 
       <label htmlFor="number" className="text-white">
         Sprint Number:
@@ -67,22 +68,17 @@ const AddSprint = ({ onRequestClose }: AddSprintProps) => {
       )}
 
       <div className="mt-6 flex gap-2 items-center justify-end">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="px-4 py-2 bg-green-500 rounded-lg text-white min-w-[100px] font-semibold uppercase disabled:cursor-not-allowed disabled:opacity-5"
-        >
+        <Button type="submit" disabled={isSubmitting}>
           Create
-        </button>
+        </Button>
 
-        <button
+        <Button
+          bg="bg-red-500"
           onClick={onRequestClose}
           disabled={isSubmitting}
-          type="button"
-          className="px-4 py-2 bg-red-500 rounded-lg text-white min-w-[100px] font-semibold uppercase disabled:cursor-not-allowed disabled:opacity-5"
         >
           Cancel
-        </button>
+        </Button>
       </div>
     </form>
   );

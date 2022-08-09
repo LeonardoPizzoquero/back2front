@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import ReactModal, { Props } from 'react-modal';
 
-import useLockBodyScroll from '../../hooks/useLockBodyScroll';
+import useLockBodyScroll from 'hooks/useLockBodyScroll';
 
 interface ModalProps extends Props {
   children: ReactNode;
@@ -27,7 +27,7 @@ const Modal = ({
       onRequestClose={onRequestClose}
       style={{
         content: {
-          maxWidth: 'max-content',
+          maxWidth: '720px',
           width: '100%',
         },
       }}

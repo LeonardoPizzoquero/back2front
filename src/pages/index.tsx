@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { GetServerSideProps } from 'next';
-import { FiPlus } from 'react-icons/fi';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 
-import { db } from '../services/firebase';
+import { db } from 'services/firebase';
 
-import SEO from '../components/SEO';
-import Modal from '../components/Modal';
-import AddSprint from '../components/AddSprint';
+import SEO from 'components/SEO';
+import Modal from 'components/Modal';
+import AddSprint from 'components/Modals/AddSprint';
+import ItemCard from 'components/ItemCard';
+import AddCard from 'components/AddCard';
+import PageTitle from 'components/PageTitle';
+import DefaultPageContainer from 'components/DefaultPageContainer';
 
 type Sprint = {
   id: string;
@@ -40,40 +42,34 @@ const Sprints = ({ sprints }: SprintProps) => {
   }, []);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 pb-10">
+    <DefaultPageContainer>
       <SEO title="Sprints" />
 
-      <h1 className="text-4xl text-white font-bold mb-12">Our Sprints</h1>
+      <PageTitle>Our Sprints</PageTitle>
 
-      <ul className="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols-1 gap-10 list-none">
+      <ul className="mt-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid grid-cols-1 gap-10 list-none">
         <li>
-          <button
-            onClick={() => setIsAddSprintOpen(true)}
-            type="button"
-            className="flex items-center justify-center w-full h-64 bg-gray-800 rounded-xl border-4 text-white text-2xl font-bold border-green-500 hover:bg-green-500 transition-all duration-200"
-          >
-            <FiPlus size={64} className="mr-2" />
-          </button>
+          <AddCard onClick={() => setIsAddSprintOpen(true)} />
         </li>
 
         {sprintList.map(sprint => (
           <li key={sprint.id}>
-            <Link href={`/sprint/${sprint.id}`}>
-              <a
-                href={`/sprint/${sprint.id}`}
-                className="flex items-center justify-center w-full p-4 h-64 bg-gray-800 rounded-xl border-4 text-white text-2xl font-bold border-purple-500 hover:bg-purple-500 transition-all duration-200"
-              >
-                SPRINT {sprint.number}
-              </a>
-            </Link>
+            <ItemCard
+              href={`/sprint/${sprint.id}`}
+              name={`SPRINT ${sprint.number}`}
+            />
           </li>
         ))}
       </ul>
 
-      <Modal isOpen={isAddSprintOpen}>
+      <Modal
+        isOpen={isAddSprintOpen}
+        onRequestClose={() => setIsAddSprintOpen(false)}
+        shouldCloseOnOverlayClick={false}
+      >
         <AddSprint onRequestClose={() => setIsAddSprintOpen(false)} />
       </Modal>
-    </main>
+    </DefaultPageContainer>
   );
 };
 

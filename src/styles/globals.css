@@ -21,3 +21,12 @@
   max-height: 90vh;
   z-index: 90;
 }
+
+.ql-container {
+  background-color: #fff;
+  font-size: 16px!important;
+}
+
+.ql-editor {
+  white-space: normal!important;
+}
